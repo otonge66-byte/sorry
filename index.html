@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sorry Sister</title>
+
+<style>
+body{
+    text-align:center;
+    font-family:Arial;
+    margin-top:100px;
+}
+.hidden{
+    display:none;
+}
+
+/* shake animation for NOT screen */
+#shake{
+    animation: shake 0.4s infinite;
+}
+@keyframes shake{
+    0%{transform:translateX(0)}
+    25%{transform:translateX(-10px)}
+    50%{transform:translateX(10px)}
+    75%{transform:translateX(-10px)}
+    100%{transform:translateX(0)}
+}
+
+/* heart animation */
+.heart{
+    position:fixed;
+    font-size:24px;
+    animation: float 3s linear forwards;
+}
+@keyframes float{
+    from{bottom:0; opacity:1;}
+    to{bottom:100%; opacity:0;}
+}
+</style>
+
+</head>
+<body>
+
+<!-- SCREEN 1 -->
+<div id="screen1">
+    <h2>Please forgive me 🥺</h2>
+    <button onclick="goAccept()">Accept ❤️</button>
+    <button onclick="goNot()">Not 😠</button>
+</div>
+
+<!-- SCREEN 2 -->
+<div id="screen2" class="hidden">
+    <div id="shake">
+        <h2>Really not? 😢</h2>
+        <p>Soch lo ek baar...</p>
+        <button onclick="goAccept()">Accept ❤️</button>
+        <button onclick="backToFirst()">Not 😠</button>
+    </div>
+</div>
+
+<!-- FINAL SCREEN -->
+<div id="final" class="hidden">
+    <h2>Thank you ❤️</h2>
+    <p>I’m really sorry 💐</p>
+</div>
+
+<script>
+function goNot(){
+    screen1.classList.add("hidden");
+    screen2.classList.remove("hidden");
+}
+
+function backToFirst(){
+    screen2.classList.add("hidden");
+    screen1.classList.remove("hidden");
+}
+
+function goAccept(){
+    screen1.classList.add("hidden");
+    screen2.classList.add("hidden");
+    final.classList.remove("hidden");
+
+    for(let i=0;i<20;i++){
+        let h = document.createElement("div");
+        h.className = "heart";
+        h.innerText = "❤️";
+        h.style.left = Math.random()*100 + "%";
+        document.body.appendChild(h);
+        setTimeout(()=>h.remove(),3000);
+    }
+}
+</script>
+
+</body>
+</html>
+
